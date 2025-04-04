@@ -1,4 +1,4 @@
-Restaurant Bot
+##Restaurant Bot
 Overview
 The Restaurant Bot package is a ROS-based implementation for autonomous service robots in restaurant environments. It facilitates order delivery, navigation, and table management using ROS.
 
