@@ -1,3 +1,0 @@
-<launch>
-    <node name="imu_publisher" pkg="imu_publisher" type="publisher.py" output="screen" />
-</launch>
