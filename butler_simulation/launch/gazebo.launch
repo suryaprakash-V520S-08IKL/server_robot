@@ -1,0 +1,42 @@
+<launch>
+  <!-- Launch Gazebo with the restaurant world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find butler_simulation)/worlds/restaurant.world"/>
+    <arg name="gui" value="true"/>  <!-- Ensure GUI is enabled -->
+  </include>
+
+  <!-- Load the URDF to the parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find butler_simulation)/urdf/butler.urdf" />
+
+  <!-- Spawn the robot model in Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+        args="-urdf -model butler_robot -param robot_description" 
+        output="screen"/>
+
+  <!-- Start controller manager -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" 
+        args="diff_drive_controller" 
+        output="screen"/>
+
+  <!-- Start AMCL for localization -->
+  <node name="amcl" pkg="amcl" type="amcl" respawn="false" output="screen">
+    <param name="use_map_topic" value="true"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="update_min_d" value="0.2"/>
+    <param name="update_min_a" value="0.1"/>
+  </node>
+
+  <!-- Move Base for Navigation -->
+  <node name="move_base" pkg="move_base" type="move_base" output="screen">
+    <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+  </node>
+
+  <!-- Static Transform Publisher (for TF between odom & base_link) -->
+  <node name="tf_odom_base_link" pkg="tf" type="static_transform_publisher"
+        args="0 0 0 0 0 0 odom base_link 100" />
+
+</launch>
+

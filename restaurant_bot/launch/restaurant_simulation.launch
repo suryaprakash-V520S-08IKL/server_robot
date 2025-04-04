@@ -1,0 +1,12 @@
+<launch>
+    <arg name="world_file" default="$(find restaurant_bot)/worlds/restaurant_world.world"/>
+
+    <!-- Launch Gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_file)"/>
+    </include>
+
+    <!-- Spawn the TurtleBot -->
+    <include file="$(find restaurant_bot)/launch/spawn_turtlebot.launch"/>
+</launch>
+

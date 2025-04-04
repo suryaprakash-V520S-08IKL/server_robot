@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="restaurant_world">
+    
+    <!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Lights -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Walls (Fully Enclosed Restaurant) -->
+
+    <!-- Front Wall -->
+    <model name="front_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>0 5 0.5 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>10 0.2 1</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>10 0.2 1</size></box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Back Wall -->
+    <model name="back_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>0 -5 0.5 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>10 0.2 1</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>10 0.2 1</size></box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Left Wall -->
+    <model name="left_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>-5 0 0.5 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.2 10 1</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.2 10 1</size></box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Right Wall -->
+    <model name="right_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>5 0 0.5 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.2 10 1</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.2 10 1</size></box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+
+    <!-- Kitchen Round Table (Custom Geometry) -->
+    <model name="kitchen_round_table">
+      <static>true</static>
+      <link name="link">
+        <pose>0 -3 0 0 0 0</pose>
+
+        <!-- Visual for Round Table -->
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.6</radius>
+              <length>0.1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient> <!-- Gray Color -->
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </visual>
+
+        <!-- Collision for Round Table -->
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.6</radius>
+              <length>0.1</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Tables -->
+    <model name="table1">
+      <include>
+        <uri>model://cafe_table</uri>
+      </include>
+      <pose>2 2 0 0 0 0</pose>
+    </model>
+
+    <model name="table2">
+      <include>
+        <uri>model://cafe_table</uri>
+      </include>
+      <pose>-2 -2 0 0 0 0</pose>
+    </model>
+
+    <model name="table3">
+      <include>
+        <uri>model://cafe_table</uri>
+      </include>
+      <pose>3 -3 0 0 0 0</pose>
+    </model>
+
+    <!-- ✅ Gazebo ROS Control Plugin -->
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+
+  </world>
+</sdf>
+
