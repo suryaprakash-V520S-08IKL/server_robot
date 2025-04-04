@@ -1,94 +1,98 @@
-Restaurant Bot - ROS Package
-🚀 Autonomous Navigation & Simulation for Restaurant Service Robots
+Restaurant Bot
+Overview
+The Restaurant Bot package is a ROS-based implementation for autonomous service robots in restaurant environments. It facilitates order delivery, navigation, and table management using ROS.
 
-This package enables a restaurant service robot to navigate autonomously using ROS, integrating mapping, localization, and path planning.
+Features
+🛎️ Autonomous navigation to designated tables.
 
-📂 Package Structure
+🗣️ Order handling via ROS topics.
+
+🎯 Real-time location tracking using TF and sensor fusion.
+
+📡 ROS-based communication for seamless integration.
+
+Installation
+Prerequisites
+Ensure ROS Noetic is installed and your catkin workspace is set up:
+
 bash
 Copy
 Edit
-restaurant_bot/
-├── launch/                  # Launch files for navigation & simulation
-│   ├── restaurant_navigation.launch
-│   ├── restaurant_simulation.launch
-│   ├── spawn_turtlebot.launch
-├── maps/                    # Predefined restaurant environment maps
-│   ├── restaurant_map.pgm
-│   ├── restaurant_map.yaml
-├── scripts/                 # Python scripts for robot behavior
-│   ├── server_robot.py
-├── worlds/                  # Gazebo world files
-│   ├── restaurant_world.world
-├── CMakeLists.txt           # Build configuration
-├── package.xml              # Package dependencies and metadata
-└── README.md                # This file
-🔧 Installation & Setup
-Clone the package into your ROS workspace:
-
+sudo apt update && sudo apt install ros-noetic-desktop-full
+source /opt/ros/noetic/setup.bash
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+Clone the Repository
 bash
 Copy
 Edit
 cd ~/catkin_ws/src
-git clone https://github.com/suryaprakash-V520S-08IKL/server_robot.git
+git clone https://github.com/suryaprakash-V520S-08IKL/restaurant_bot.git
 cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
-Install dependencies:
-
+Package Structure
 bash
 Copy
 Edit
-rosdep install --from-paths src --ignore-src -r -y
-🚀 Usage
-1️⃣ Launch Simulation
-Start the restaurant environment in Gazebo:
+restaurant_bot/
+│-- launch/
+│   ├── restaurant_navigation.launch  # Navigation setup
+│   ├── restaurant_simulation.launch  # Simulation setup
+│   ├── spawn_turtlebot.launch        # Spawns the robot
+│-- maps/
+│   ├── restaurant_map.pgm            # Map file
+│   ├── restaurant_map.yaml           # Map metadata
+│-- scripts/
+│   ├── server_robot.py               # Main control script
+│-- worlds/
+│   ├── restaurant_world.world        # Gazebo world file
+│-- CMakeLists.txt                    # CMake build configuration
+│-- package.xml                       # Package metadata
+│-- README.md                         # Documentation
+Usage
+1. Start the Simulation
+Launch the restaurant environment in Gazebo:
 
 bash
 Copy
 Edit
 roslaunch restaurant_bot restaurant_simulation.launch
-2️⃣ Launch Navigation
-Enable autonomous navigation:
+2. Enable Navigation
+Activate autonomous navigation:
 
 bash
 Copy
 Edit
 roslaunch restaurant_bot restaurant_navigation.launch
-3️⃣ Spawn the Robot
-To manually spawn a TurtleBot in the restaurant world:
+3. Spawn the Robot
+Manually spawn a TurtleBot:
 
 bash
 Copy
 Edit
 roslaunch restaurant_bot spawn_turtlebot.launch
-4️⃣ Run the Robot State Publisher
-To publish the robot’s state:
+4. Publish Robot State
+Run the robot_state_publisher:
 
 bash
 Copy
 Edit
 rosrun robot_state_publisher robot_state_publisher
-5️⃣ Run the Server Robot Script
-Execute the main robot control script:
+5. Start the Server Robot Script
+Run the restaurant bot control node:
 
 bash
 Copy
 Edit
 rosrun restaurant_bot server_robot.py
-🛠️ Troubleshooting
-If the simulation does not start, check Gazebo installation:
-
-bash
-Copy
-Edit
-sudo apt-get install ros-noetic-gazebo-ros
-If the robot does not move, verify that the navigation stack is running:
-
-bash
-Copy
-Edit
-rostopic list
-
+ROS Topics
+Topic Name	Message Type	Description
+/cmd_vel	geometry_msgs/Twist	Controls robot movement
+/robot_pose	geometry_msgs/Pose	Publishes robot position updates
+Contributing
+Feel free to submit issues or pull requests to enhance the package! 🚀
 
 📧 Contact
 📌 Developer: Surya Prakash
