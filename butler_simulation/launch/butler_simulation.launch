@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="butler_simulation" type="butler_navigation.py" name="butler_navigation" output="screen"/>
-    <node pkg="butler_simulation" type="test_orders.py" name="order_publisher" output="screen"/>
-</launch>
-

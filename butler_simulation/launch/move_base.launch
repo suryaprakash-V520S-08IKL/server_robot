@@ -1,9 +1,0 @@
-<launch>
-    <node pkg="move_base" type="move_base" name="move_base" output="screen">
-        <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
-        <param name="planner_frequency" value="1.0"/>
-        <param name="controller_frequency" value="10.0"/>
-    </node>
-</launch>
-
